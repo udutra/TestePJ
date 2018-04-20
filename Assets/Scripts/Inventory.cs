@@ -2,19 +2,35 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class Inventory : MonoBehaviour, IHasChanged
 {
     [SerializeField] Transform slots;
+    
     [SerializeField] Text inventoryText;
     private GameObject[] comands;
+    public Button btPlay;
     public Player player;
 
     // Use this for initialization
     void Start()
     {
         //HasChanged();
+        
         comands = new GameObject[4];
+    }
+
+    private void FixedUpdate()
+    {
+        if (VerificaCompleto())
+        {
+            btPlay.gameObject.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            btPlay.gameObject.GetComponent<Button>().interactable = false;
+        }
     }
 
     #region IHasChanged implementation
@@ -22,63 +38,66 @@ public class Inventory : MonoBehaviour, IHasChanged
     public void HasChanged()
     {
         System.Text.StringBuilder builder = new System.Text.StringBuilder();
-        builder.Append(" - ");
 
-        for(int i = 0; i < slots.childCount; i++)
+        for (int i = 0; i < slots.childCount; i++)
         {
             GameObject item = slots.GetChild(i).GetComponent<Slot>().Item;
             if (item)
             {
                 comands[i] = item;
-                builder.Append(item.name);
-                builder.Append(" - ");
+                builder.Append((i+1) + "º: " + item.name);
+                builder.Append("\n");
             }
         }
 
         inventoryText.text = builder.ToString();
-
-        /* foreach (Transform slotTransform in slots)
-         {
-             GameObject item = slotTransform.GetComponent<Slot>().item;
-             if (item)
-             {
-                 comands()
-                 builder.Append(item.name);
-                 builder.Append(" - ");
-             }
-         }
-         inventoryText.text = builder.ToString();*/
     }
     #endregion
 
     public void Comands()
     {
-        //Debug.Log("comands.Count: " + comands.Length);
-        for (int i = 0; i < comands.Length; i++)
+        if (VerificaCompleto())
         {
-            if (comands[i] == null)
-            {
-                Debug.Log((i + 1) + "º Comando: null");
-            }
-            else
+            Debug.Log("Completo");
+            for (int i = 0; i < comands.Length; i++)
             {
                 Debug.Log((i + 1) + "º Comando: " + comands[i].name);
-                if(comands[i].name == "Direita")
+
+                switch (comands[i].name)
                 {
-                    Debug.Log("Aqui");
-                    Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
-                    Transform rp = player.GetComponent<Transform>();
-                    //float movX = Input.GetAxis("Horizontal");
-                    rp.Translate(Vector2.right * 2 * Time.deltaTime);
-                    
+                    case "Direita":
+                        Debug.Log("Entrou no Direita");
+                        /*Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+                        Transform rp = player.GetComponent<Transform>();
+                        //float movX = Input.GetAxis("Horizontal");
+                        rp.Translate(Vector2.right * 2 * Time.deltaTime);*/
+                        player.Move(1);
+                        break;
+                    case "Pular":
+                        //player.Jump();
+                        break;
+                    default:
+                        break;
                 }
+
             }
-            
-            //Debug.Log("i: " + i);
-               
         }
     }
 
+
+
+    private bool VerificaCompleto()
+    {
+        for (int i = 0; i < slots.childCount; i++)
+        {
+            GameObject item = slots.GetChild(i).GetComponent<Slot>().Item;
+            if (item == null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 

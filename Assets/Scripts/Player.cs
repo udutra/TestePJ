@@ -25,7 +25,7 @@ public class Player : MonoBehaviour {
         Jump();
     }
 
-    private void Move()
+    public void Move()
     {
 
         movX = Input.GetAxis("Horizontal");
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour {
         transf.localScale = scale;
     }
 
-    void Jump()
+    public void Jump()
     {
         var AbsVelY = Mathf.Abs(rb.velocity.y);
 
@@ -80,5 +80,22 @@ public class Player : MonoBehaviour {
         {
             //playerAnimator.SetBool("Jump", false);
         }
+    }
+
+    public void Move(float x)
+    {
+
+        movX = x;
+
+        if (movX > 0) // Movimentando para direita e meu objeto não estiver olhando para a direita
+        {
+            rb.velocity = new Vector2(movX * speed, rb.velocity.y);
+        }
+        else if (movX < 0 && facingRight) // Movimentando para esquerda e meu objeto estiver olhando para a direita
+        {
+            rb.velocity = new Vector2(movX * speed, rb.velocity.y);
+        }
+
+        //rb.velocity = new Vector2(movX * speed, rb.velocity.y);
     }
 }
