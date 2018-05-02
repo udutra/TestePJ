@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50906800074225598}
   m_Layer: 0
   m_Name: Plataforma 9
-  m_TagString: Untagged
+  m_TagString: Bloco
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 50279788832659308}
   m_Layer: 0
   m_Name: Plataforma 4
-  m_TagString: Untagged
+  m_TagString: Bloco
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 50309237516653152}
   m_Layer: 0
   m_Name: Plataforma 6
-  m_TagString: Untagged
+  m_TagString: Bloco
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 50591311704939284}
   m_Layer: 0
   m_Name: Plataforma 7
-  m_TagString: Untagged
+  m_TagString: Bloco
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 50915632003107538}
   m_Layer: 0
   m_Name: Plataforma 1
-  m_TagString: Untagged
+  m_TagString: Bloco
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 50865748105554570}
   m_Layer: 0
   m_Name: Plataforma 5
-  m_TagString: Untagged
+  m_TagString: Bloco
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 50028023839990080}
   m_Layer: 0
   m_Name: Plataforma 2
-  m_TagString: Untagged
+  m_TagString: Bloco
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 50781194670714118}
   m_Layer: 0
   m_Name: Plataforma 3
-  m_TagString: Untagged
+  m_TagString: Bloco
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 50177001553900022}
   m_Layer: 0
   m_Name: Plataforma 8
-  m_TagString: Untagged
+  m_TagString: Bloco
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,7 +234,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267218957271416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: -1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4062060396120228}

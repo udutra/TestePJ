@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Bloco
   - BtPlay
+  - ColisorPlataforma
+  - Item
+  - ColisorChao
+  - VidaTxt
+  - ScoreTxt
   layers:
   - Default
   - TransparentFX
