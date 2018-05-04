@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
     public Vector2 posInicial;
 
     private bool jumping, executar;
-    public Inventory inventory;
+    public Inventory inventory, inventoryGeral;
     //public float speed = 3f;
     public float jumpforce = 200f;
     //public float movX, movY;
@@ -27,7 +27,6 @@ public class Player : MonoBehaviour {
     private Animator playerAnimator;
     public float val;
     private float valPulo;
-    //private bool deletarPlataforma;
 
     //private int pontuacao, vida;
 
@@ -53,14 +52,43 @@ public class Player : MonoBehaviour {
         time = 1f;
         valPulo = 120.822f;
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        gc.EscreveTela();
+        //gc.EscreveTela();
     }
 
     void FixedUpdate()
     {
-        //time = time + Time.deltaTime;
-        //Debug.Log("Time: " + time);
-        
+
+        VerificaBotao();
+
+        if (colisorP.activeSelf == false)
+        {
+            if (time > 0.0f)
+            {
+                time -= Time.deltaTime;
+            }
+            else
+            {
+                if (executar)
+                {
+                    //Invoke("ExecutarP", 1);
+                    ExecutarP();
+                    pos++;
+                    if (pos >= inventory.comands.Length)
+                    {
+                        pos = 0;
+                        executar = false;
+                        LimparTela();
+                    }
+                }
+                time = 1;
+            }
+        }
+    }
+
+    
+
+    private void VerificaBotao()
+    {
         if (VerificaCompleto())
         {
             btPlay.gameObject.GetComponent<Button>().interactable = true;
@@ -69,29 +97,6 @@ public class Player : MonoBehaviour {
         {
             btPlay.gameObject.GetComponent<Button>().interactable = false;
         }
-
-        if(time > 0.0f)
-        {
-            time -= Time.deltaTime;
-        }
-        else
-        {
-            if (executar)
-            {
-                //Invoke("ExecutarP",1);
-                ExecutarP();
-                pos++;
-                if (pos >= inventory.comands.Length)
-                {
-                    pos = 0;
-                    executar = false;
-                }
-            }
-            time = 1;
-            
-        }
-        
-        
     }
 
     /*public void Mover()
@@ -146,40 +151,43 @@ public class Player : MonoBehaviour {
 
     public void ExecutarP()
     {
-        //Debug.Log("Entrou no executar");
-        //Debug.Log("pos: " + pos);
-        switch (inventory.comands[pos].name)
-        {
-            case "Direita":
-                //Debug.Log("Entrou no Direita");
-                ////transf.Translate(Vector2.right * velocidade);
-                //transf.position = Vector2.Lerp(transf.position, transf.position + new Vector3(0.72f,0,0), val);
-                //playerAnimator.SetBool("Caminhando", true);
-                rb.AddForce(new Vector2(valPulo, 0));
-                break;
-            case "Pular":
-                //Debug.Log("Entrou no Pular!");
-                rb.AddForce(new Vector2(45, jumpforce));
-                break;
-            case "Quebrar":
-                //Debug.Log("Entrou no Quebrar!");
-                //Debug.Log("deletarPlataforma" + deletarPlataforma);
-                colisorP.SetActive(true);
-                //colisorP.SetActive(false);
+       
+            Debug.Log("Entrou no executar");
+            Debug.Log("pos: " + pos);
+            switch (inventory.comands[pos].name)
+            {
+                case "Direita":
+                    Debug.Log("Entrou no Direita");
+                    ////transf.Translate(Vector2.right * velocidade);
+                    //transf.position = Vector2.Lerp(transf.position, transf.position + new Vector3(0.72f,0,0), val);
+                    //playerAnimator.SetBool("Caminhando", true);
+                    rb.AddForce(new Vector2(valPulo, 0));
+                    break;
+                case "Pular":
+                    Debug.Log("Entrou no Pular!");
+                    rb.AddForce(new Vector2(45*2, jumpforce));
+                    break;
+                case "Quebrar":
+                    Debug.Log("Entrou no Quebrar!");
+                    //Debug.Log("deletarPlataforma" + deletarPlataforma);
+                    colisorP.SetActive(true);
+                    //colisorP.SetActive(false);
 
 
 
-                break;
-            case "Esquerda":
-                //Debug.Log("Entrou no Esquerda!");
-                //transf.position = Vector2.Lerp(transf.position, transf.position - new Vector3(0.72f, 0, 0), val);
-                rb.AddForce(new Vector2(-valpos, 0));
-                break;
-            default:
-                //Debug.Log("Break!");
-                break;
-        }
-        playerAnimator.SetBool("Caminhando", false);
+                    break;
+                case "Esquerda":
+                    Debug.Log("Entrou no Esquerda!");
+                    //transf.position = Vector2.Lerp(transf.position, transf.position - new Vector3(0.72f, 0, 0), val);
+                    rb.AddForce(new Vector2(-valpos, 0));
+                    break;
+                default:
+                    Debug.Log("Break!");
+                    break;
+
+            }
+            playerAnimator.SetBool("Caminhando", false);
+        
     }
 
     public void Executar()
@@ -211,6 +219,38 @@ public class Player : MonoBehaviour {
     {
         gc.ReiniciaFase();
     }
+
+    public void MortePlayer()
+    {
+        Debug.Log("Entrou na morte do PLayer");
+        gc.ReiniciaFase();
+    }
+
+    /*private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bloco"))
+        {
+            noChao = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bloco"))
+        {
+            noChao = true;
+        }
+        
+    }*/
+
+    public void LimparTela()
+    {
+        /*for(int i = 0; i < inventory.comands.Length; i++)
+        {
+            
+        }*/
+    }
+
 }
 
 

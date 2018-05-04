@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour
     {
         vidaTxt = GameObject.FindGameObjectWithTag("VidaTxt").GetComponent<Text>();
         scoreTxt = GameObject.FindGameObjectWithTag("ScoreTxt").GetComponent<Text>();
-        EscreveTela();
+        //EscreveTela();
     }
 
     public void EscreveTela()
